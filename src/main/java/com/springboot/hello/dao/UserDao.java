@@ -1,15 +1,12 @@
-package jdbc.userdao.dao;
+package com.springboot.hello.dao;
 
-import jdbc.userdao.domain.User;
+import com.springboot.hello.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class UserDao {
     private final DataSource dataSource;

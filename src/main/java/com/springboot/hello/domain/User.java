@@ -1,4 +1,4 @@
-package jdbc.userdao.domain;
+package com.springboot.hello.domain;
 
 public class User {
     private String id;

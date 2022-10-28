@@ -1,7 +1,7 @@
-package jdbc.userdao.controller;
+package com.springboot.hello.controller;
 
-import jdbc.userdao.dao.UserDao;
-import jdbc.userdao.domain.User;
+import com.springboot.hello.dao.UserDao;
+import com.springboot.hello.domain.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
