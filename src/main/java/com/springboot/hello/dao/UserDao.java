@@ -3,11 +3,12 @@ package com.springboot.hello.dao;
 import com.springboot.hello.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+@Service
 public class UserDao {
     private final DataSource dataSource;
     private final JdbcTemplate jdbcTemplate;
