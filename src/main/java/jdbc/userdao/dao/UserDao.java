@@ -2,6 +2,7 @@ package jdbc.userdao.dao;
 
 import jdbc.userdao.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -18,6 +19,13 @@ public class UserDao {
         this.dataSource = dataSource;
         this.jdbcTemplate = jdbcTemplate;
     }
+    RowMapper<User> rowMapper = new RowMapper<User>() {
+        @Override
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+            User user = new User(rs.getString("id"),rs.getString("name"),rs.getString("password"));
+            return user;
+        }
+    };
 
     public void add(User user) {
         this.jdbcTemplate.update("insert into users(id, name, password) values (?,?,?)",
@@ -29,21 +37,7 @@ public class UserDao {
     }
 
     public User findByID(String id) throws SQLException {
-        Map<String, String> env = System.getenv();
-        Connection c;
-        c = dataSource.getConnection();
-        PreparedStatement ps = c.prepareStatement("select *from users where id = ?");
-        ps.setString(1, id);
-        ResultSet rs = ps.executeQuery();
-        User user = null;
-        if (rs.next()) {
-            user = new User(rs.getString("id"), rs.getString("name"),
-                    rs.getString("password"));
-        }
-        rs.close();
-        ps.close();
-        c.close();
-        if (user == null) throw new RuntimeException();
-        return user;
+        String sql = "select *from users where id = ?";
+        return jdbcTemplate.queryForObject(sql,rowMapper,id);
     }
 }
